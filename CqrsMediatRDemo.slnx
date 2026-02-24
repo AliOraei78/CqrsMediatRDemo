@@ -2,5 +2,8 @@
   <Folder Name="/Solution Items/">
     <File Path="README.md" />
   </Folder>
-  <Project Path="CqrsMediatRDemo/CqrsMediatRDemo.csproj" />
+  <Project Path="CqrsMediatRDemo.Api/CqrsMediatRDemo.Api.csproj" Id="aa795375-db98-445f-b8e1-56042196e06c" />
+  <Project Path="CqrsMediatRDemo.Application/CqrsMediatRDemo.Application.csproj" Id="c59de982-1343-472e-91da-35f6564332ba" />
+  <Project Path="CqrsMediatRDemo.Domain/CqrsMediatRDemo.Domain.csproj" Id="dabfd36f-8797-457a-8bb9-085ad1015ba7" />
+  <Project Path="CqrsMediatRDemo.Infrastructure/CqrsMediatRDemo.Infrastructure.csproj" Id="0c1294ea-56fb-4989-9bad-9cb9cf97e88b" />
 </Solution>

@@ -1,9 +1,18 @@
-# CqrsMediatRDemo
+# CleanCQRSDemo
 
-Educational project for implementing **CQRS + MediatR + Domain Events + Outbox Pattern** in .NET
+A professional sample project based on **Clean Architecture + CQRS + MediatR + Domain Events + Outbox Pattern**
 
-## Day 1 – Introduction to CQRS
+## Technologies
 
-* Understanding the concepts of Command and Query
-* Separating read and write responsibilities
-* Creating the initial project structure (Solution)
+* .NET 8
+* ASP.NET Core Web API
+* MediatR 14.0.0
+* Entity Framework Core
+* Clean Architecture
+
+## Project Structure
+
+* CleanCQRSDemo.Domain
+* CleanCQRSDemo.Application
+* CleanCQRSDemo.Infrastructure
+* CleanCQRSDemo.Api
