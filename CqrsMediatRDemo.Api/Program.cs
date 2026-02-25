@@ -1,6 +1,8 @@
+using CqrsMediatRDemo.Infrastructure.Persistence;
 using CqrsMediatRDemo.Infrastructure.Services;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -11,6 +13,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi(); builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<WriteDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("WriteDb"))
+           .AddInterceptors(new OutboxInterceptor()));
 
 builder.Services.AddHostedService<OutboxProcessorBackgroundService>();
 

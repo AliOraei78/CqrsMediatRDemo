@@ -49,3 +49,10 @@ A professional sample project based on **Clean Architecture + CQRS + MediatR + D
 * Implement `OutboxInterceptor` to extract and store Domain Events within the transaction
 * Create a simple Background Service for polling and processing messages
 * Ensure event reliability without losing any messages
+
+## Day 7.1 – Write Side with SQL Server
+
+* Real `WriteDbContext` using EF Core + SQL Server
+* Configuration for `Product` (including Value Object ownership)
+* Initial migration and `Update-Database`
+* Outbox Interceptor remains active
