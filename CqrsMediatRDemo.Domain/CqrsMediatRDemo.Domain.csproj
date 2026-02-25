@@ -12,11 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
     <Folder Include="Events\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Exceptions\" />
-    <Folder Include="ValueObjects\" />
+    <Folder Include="Aggregates\" />
   </ItemGroup>
 
 </Project>

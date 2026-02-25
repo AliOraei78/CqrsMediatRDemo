@@ -11,8 +11,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
-    typeof(Program).Assembly,                          // Api
-    typeof(Application.AssemblyReference).Assembly     // Application
+    typeof(Program).Assembly,                             
+    typeof(CqrsMediatRDemo.Application.AssemblyReference).Assembly  
+                                                                 
 ));
 
 var app = builder.Build();

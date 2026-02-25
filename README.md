@@ -10,9 +10,15 @@ A professional sample project based on **Clean Architecture + CQRS + MediatR + D
 * Entity Framework Core
 * Clean Architecture
 
-## Project Structure
+## Day 1: Implemented Project Structure
 
 * CleanCQRSDemo.Domain
 * CleanCQRSDemo.Application
 * CleanCQRSDemo.Infrastructure
 * CleanCQRSDemo.Api
+
+## Day 2 – Domain Model (Domain Layer)
+
+* Implementing a base Entity
+* Implementing a base Value Object + a sample `Money` value object
+* Aggregate Root: `Product` with protected invariants
