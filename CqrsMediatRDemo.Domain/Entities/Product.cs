@@ -5,7 +5,7 @@ using System;
 
 namespace CqrsMediatRDemo.Domain.Entities;
 
-public class Product : Entity<Guid>
+public class Product : Entity<Guid>, IHasDomainEvents
 {
     public string Name { get; private set; } = default!;
     public string Description { get; private set; } = string.Empty;

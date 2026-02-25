@@ -36,7 +36,6 @@ public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, P
 }
 
 
-// در آینده وقتی ReadDbContext اضافه شد:
 /*
 public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, ProductDto?>
 {

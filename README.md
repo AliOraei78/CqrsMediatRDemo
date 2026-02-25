@@ -42,3 +42,10 @@ A professional sample project based on **Clean Architecture + CQRS + MediatR + D
 * Implement event collection mechanism in the Aggregate Root (`Product`)
 * Publish events synchronously using MediatR `INotification`
 * Sample Handler using `ILogger` to react to the event
+
+## Day 6 – Outbox Pattern
+
+* Define the `OutboxMessages` table entity and its configuration
+* Implement `OutboxInterceptor` to extract and store Domain Events within the transaction
+* Create a simple Background Service for polling and processing messages
+* Ensure event reliability without losing any messages

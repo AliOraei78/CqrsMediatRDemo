@@ -1,3 +1,4 @@
+using CqrsMediatRDemo.Infrastructure.Services;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi(); builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddHostedService<OutboxProcessorBackgroundService>();
 
 // Register MediatR with a Validation Behavior (optional but highly recommended)
 builder.Services.AddMediatR(cfg =>
