@@ -1,10 +1,10 @@
-# CleanCQRSDemo
+# CqrsMediatRDemo
 
 A professional sample project based on **Clean Architecture + CQRS + MediatR + Domain Events + Outbox Pattern**
 
 ## Technologies
 
-* .NET 8
+* .NET 10
 * ASP.NET Core Web API
 * MediatR 14.0.0
 * Entity Framework Core
@@ -12,13 +12,26 @@ A professional sample project based on **Clean Architecture + CQRS + MediatR + D
 
 ## Day 1: Implemented Project Structure
 
-* CleanCQRSDemo.Domain
-* CleanCQRSDemo.Application
-* CleanCQRSDemo.Infrastructure
-* CleanCQRSDemo.Api
+* CqrsMediatRDemo.Domain
+* CqrsMediatRDemo.Application
+* CqrsMediatRDemo.Infrastructure
+* CqrsMediatRDemo.Api
 
 ## Day 2 – Domain Model (Domain Layer)
 
 * Implementing a base Entity
 * Implementing a base Value Object + a sample `Money` value object
 * Aggregate Root: `Product` with protected invariants
+
+## Day 3 – Commands with MediatR
+
+* Implement `CreateProductCommand` (record)
+* Add a Validator using FluentValidation
+* Create the initial Handler (with simulated persistence)
+* Register Validators in Dependency Injection (DI)
+
+## Day 4 – Queries with MediatR
+
+* Implement `GetProductByIdQuery` and its Handler with projection to `ProductDto`
+* Introduce `ListProductsQuery` (optional)
+* Focus on read-only operations and optimization (`AsNoTracking` in the final version)

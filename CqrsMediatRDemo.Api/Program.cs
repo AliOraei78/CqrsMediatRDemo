@@ -1,4 +1,5 @@
 using MediatR;
+using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -10,11 +11,17 @@ builder.Services.AddOpenApi(); builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
-    typeof(Program).Assembly,                             
-    typeof(CqrsMediatRDemo.Application.AssemblyReference).Assembly  
-                                                                 
-));
+// Register MediatR with a Validation Behavior (optional but highly recommended)
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssemblies(
+        typeof(Program).Assembly,
+        typeof(CqrsMediatRDemo.Application.AssemblyReference).Assembly
+    );
+
+    // If you want automatic validation, add the Behavior (no additional package required)
+    cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));  // we will define this later
+});
 
 var app = builder.Build();
 
