@@ -1,6 +1,7 @@
-﻿using CqrsMediatRDemo.Domain.Entities;
-using System;
+﻿using CqrsMediatRDemo.Domain.Events;
+using CqrsMediatRDemo.Domain.Entities;
 using CqrsMediatRDemo.Domain.ValueObjects;
+using System;
 
 namespace CqrsMediatRDemo.Domain.Entities;
 
@@ -10,6 +11,8 @@ public class Product : Entity<Guid>
     public string Description { get; private set; } = string.Empty;
     public Money Price { get; private set; } = default!;
     public int StockQuantity { get; private set; }
+    private readonly List<DomainEvent> _domainEvents = new();
+    public IReadOnlyCollection<DomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
     private Product() { }
 
@@ -33,7 +36,9 @@ public class Product : Entity<Guid>
         if (newPrice.Amount <= 0)
             throw new ArgumentException("Price must be positive.", nameof(newPrice));
 
+        var oldPrice = Price;
         Price = newPrice;
+        AddDomainEvent(new ProductPriceChangedEvent(Id, oldPrice, newPrice));
     }
 
     public void DecreaseStock(int quantity)
@@ -54,4 +59,15 @@ public class Product : Entity<Guid>
 
         StockQuantity += quantity;
     }
+
+    protected void AddDomainEvent(DomainEvent domainEvent)
+    {
+        _domainEvents.Add(domainEvent);
+    }
+
+    public void ClearDomainEvents()
+    {
+        _domainEvents.Clear();
+    }
+
 }

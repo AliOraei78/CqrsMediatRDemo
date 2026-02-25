@@ -35,3 +35,10 @@ A professional sample project based on **Clean Architecture + CQRS + MediatR + D
 * Implement `GetProductByIdQuery` and its Handler with projection to `ProductDto`
 * Introduce `ListProductsQuery` (optional)
 * Focus on read-only operations and optimization (`AsNoTracking` in the final version)
+
+## Day 5 – Domain Events
+
+* Define a base `DomainEvent` and an example `ProductPriceChangedEvent`
+* Implement event collection mechanism in the Aggregate Root (`Product`)
+* Publish events synchronously using MediatR `INotification`
+* Sample Handler using `ILogger` to react to the event
