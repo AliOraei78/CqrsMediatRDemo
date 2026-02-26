@@ -29,6 +29,14 @@ public class Product : Entity<Guid>, IHasDomainEvents
         Description = description ?? string.Empty;
         Price = price ?? throw new ArgumentNullException(nameof(price));
         StockQuantity = initialStock;
+
+        AddDomainEvent(new ProductCreatedEvent(
+            ProductId: id,
+            Name: name,
+            Description: description ?? string.Empty,
+            Price: price,
+            InitialStock: initialStock
+        ));
     }
 
     public void UpdatePrice(Money newPrice)

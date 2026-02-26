@@ -56,3 +56,17 @@ A professional sample project based on **Clean Architecture + CQRS + MediatR + D
 * Configuration for `Product` (including Value Object ownership)
 * Initial migration and `Update-Database`
 * Outbox Interceptor remains active
+
+## Day 7.2 – Read Side with Elasticsearch
+
+* Use `Elastic.Clients.Elasticsearch` (the new official client)
+* Define `ProductReadModel` (denormalized for read operations)
+* Create an Index with explicit mapping (`keyword` for filtering, `text` for search)
+* Implement `ElasticsearchService` to manage the Index and initial indexing
+
+## Day 7.3 – Synchronization from Outbox to Elasticsearch
+
+* Update `OutboxProcessor` to perform polymorphic deserialization of Domain Events
+* Publish events via MediatR + directly update the Read Model in Elasticsearch
+* Implement eventual consistency flow: Write → Outbox → ES Read Model
+* Initial support for `ProductPriceChangedEvent` and `ProductCreatedEvent` (optional)

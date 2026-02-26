@@ -20,6 +20,8 @@ builder.Services.AddDbContext<WriteDbContext>(options =>
 
 builder.Services.AddHostedService<OutboxProcessorBackgroundService>();
 
+builder.Services.AddSingleton<ElasticsearchService>();
+
 // Register MediatR with a Validation Behavior (optional but highly recommended)
 builder.Services.AddMediatR(cfg =>
 {
@@ -45,5 +47,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+
+var esService = app.Services.GetRequiredService<ElasticsearchService>();
+await esService.CreateIndexIfNotExistsAsync();
+await esService.IndexTestDocumentAsync();
+Console.WriteLine("Elasticsearch index created and test document indexed.");
 
 app.Run();
