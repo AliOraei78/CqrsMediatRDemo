@@ -30,8 +30,4 @@
     <ProjectReference Include="..\CqrsMediatRDemo.Infrastructure\CqrsMediatRDemo.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>

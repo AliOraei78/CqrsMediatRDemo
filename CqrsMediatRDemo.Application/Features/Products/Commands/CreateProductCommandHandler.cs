@@ -1,15 +1,30 @@
-﻿using CqrsMediatRDemo.Domain.Entities;
+﻿using CqrsMediatRDemo.Application.Features.Products.Commands;
+using CqrsMediatRDemo.Application.Interfaces;
+using CqrsMediatRDemo.Application.Interfaces.Repositories;
+using CqrsMediatRDemo.Domain.Entities;
 using CqrsMediatRDemo.Domain.ValueObjects;
-using CqrsMediatRDemo.Application.Features.Products.Commands;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+
+namespace CqrsMediatRDemo.Application.Features.Products.Commands;
 
 // We will add the Repository later – for now, this is a simple mock
 public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Guid>
 {
     // private readonly IProductRepository _repository;  ← will be added later
+    private readonly IProductRepository _repository;
+    private readonly IUnitOfWork _unitOfWork;
+
+    public CreateProductCommandHandler(
+        IProductRepository repository,
+        IUnitOfWork unitOfWork)
+    {
+        _repository = repository;
+        _unitOfWork = unitOfWork;
+    }
 
     public async Task<Guid> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
@@ -25,12 +40,9 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
             initialStock: request.InitialStock
         );
 
-        // await _repository.AddAsync(product, cancellationToken);
-        // await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
+        await _repository.AddAsync(product, cancellationToken);
 
-        // For now, just simulate the behavior
-        Console.WriteLine($"Product created: {product.Name} with Id {productId}");
-
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return productId;
     }
 }

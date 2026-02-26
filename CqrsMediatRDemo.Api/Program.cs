@@ -1,4 +1,8 @@
+using CqrsMediatRDemo.Application.Interfaces;
+using CqrsMediatRDemo.Application.Interfaces.Repositories;
 using CqrsMediatRDemo.Infrastructure.Persistence;
+using CqrsMediatRDemo.Infrastructure.Persistence.ReadRepositories;
+using CqrsMediatRDemo.Infrastructure.Persistence.Repositories;
 using CqrsMediatRDemo.Infrastructure.Services;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
@@ -18,9 +22,14 @@ builder.Services.AddDbContext<WriteDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("WriteDb"))
            .AddInterceptors(new OutboxInterceptor()));
 
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
 builder.Services.AddHostedService<OutboxProcessorBackgroundService>();
 
 builder.Services.AddSingleton<ElasticsearchService>();
+
+builder.Services.AddScoped<IProductReadRepository, ProductReadRepository>();
 
 // Register MediatR with a Validation Behavior (optional but highly recommended)
 builder.Services.AddMediatR(cfg =>
@@ -47,10 +56,5 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-
-var esService = app.Services.GetRequiredService<ElasticsearchService>();
-await esService.CreateIndexIfNotExistsAsync();
-await esService.IndexTestDocumentAsync();
-Console.WriteLine("Elasticsearch index created and test document indexed.");
 
 app.Run();

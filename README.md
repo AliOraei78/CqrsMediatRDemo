@@ -70,3 +70,11 @@ A professional sample project based on **Clean Architecture + CQRS + MediatR + D
 * Publish events via MediatR + directly update the Read Model in Elasticsearch
 * Implement eventual consistency flow: Write → Outbox → ES Read Model
 * Initial support for `ProductPriceChangedEvent` and `ProductCreatedEvent` (optional)
+
+## Day 7.4 – Connecting Handlers and Testing Consistency
+
+* **Command Handler:** Persist data in `WriteDbContext` (SQL Server)
+* **Query Handler:** Read data from Elasticsearch
+* **Simple Controller** for practical testing (POST / GET)
+* **Manual eventual consistency test:** Create product → short delay → verify in Read side
+* Explanation of **Eventual Consistency** in CQRS with Outbox

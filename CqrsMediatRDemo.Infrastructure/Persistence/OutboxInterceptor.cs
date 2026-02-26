@@ -32,7 +32,7 @@ public class OutboxInterceptor : SaveChangesInterceptor
             {
                 var message = new OutboxMessage
                 {
-                    Type = domainEvent.GetType().FullName!,
+                    Type = domainEvent.GetType().AssemblyQualifiedName!,
                     Payload = JsonSerializer.Serialize(domainEvent, domainEvent.GetType()),
                     OccurredOn = domainEvent.OccurredOn
                 };
