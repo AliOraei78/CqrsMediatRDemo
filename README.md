@@ -78,3 +78,10 @@ A professional sample project based on **Clean Architecture + CQRS + MediatR + D
 * **Simple Controller** for practical testing (POST / GET)
 * **Manual eventual consistency test:** Create product → short delay → verify in Read side
 * Explanation of **Eventual Consistency** in CQRS with Outbox
+
+## Day 8 – Behaviors and Pipeline in MediatR
+
+* **ValidationBehavior** using FluentValidation
+* **LoggingBehavior** using `ILogger` with execution timing
+* **CachingBehavior** using `IMemoryCache` (for Queries)
+* Registering open-generic behaviors in MediatR

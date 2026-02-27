@@ -1,9 +1,12 @@
+using CqrsMediatRDemo.Application.Behaviors;
+using CqrsMediatRDemo.Application.Features.Products.Validators;
 using CqrsMediatRDemo.Application.Interfaces;
 using CqrsMediatRDemo.Application.Interfaces.Repositories;
 using CqrsMediatRDemo.Infrastructure.Persistence;
 using CqrsMediatRDemo.Infrastructure.Persistence.ReadRepositories;
 using CqrsMediatRDemo.Infrastructure.Persistence.Repositories;
 using CqrsMediatRDemo.Infrastructure.Services;
+using FluentValidation;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +33,7 @@ builder.Services.AddHostedService<OutboxProcessorBackgroundService>();
 builder.Services.AddSingleton<ElasticsearchService>();
 
 builder.Services.AddScoped<IProductReadRepository, ProductReadRepository>();
+builder.Services.AddMemoryCache();
 
 // Register MediatR with a Validation Behavior (optional but highly recommended)
 builder.Services.AddMediatR(cfg =>
@@ -39,9 +43,12 @@ builder.Services.AddMediatR(cfg =>
         typeof(CqrsMediatRDemo.Application.AssemblyReference).Assembly
     );
 
-    // If you want automatic validation, add the Behavior (no additional package required)
-    cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));  // we will define this later
+    cfg.AddOpenBehavior(typeof(CqrsMediatRDemo.Application.Behaviors.ValidationBehavior<,>));
+    cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+    cfg.AddOpenBehavior(typeof(CachingBehavior<,>));
 });
+
+builder.Services.AddValidatorsFromAssemblyContaining<CreateProductCommandValidator>();
 
 var app = builder.Build();
 
