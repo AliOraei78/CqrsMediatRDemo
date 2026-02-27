@@ -6,4 +6,5 @@
   <Project Path="CqrsMediatRDemo.Application/CqrsMediatRDemo.Application.csproj" Id="c59de982-1343-472e-91da-35f6564332ba" />
   <Project Path="CqrsMediatRDemo.Domain/CqrsMediatRDemo.Domain.csproj" Id="dabfd36f-8797-457a-8bb9-085ad1015ba7" />
   <Project Path="CqrsMediatRDemo.Infrastructure/CqrsMediatRDemo.Infrastructure.csproj" Id="0c1294ea-56fb-4989-9bad-9cb9cf97e88b" />
+  <Project Path="CqrsMediatRDemo.Tests/CqrsMediatRDemo.Tests.csproj" Id="d46df6cc-d613-4a34-873a-519da5b69416" />
 </Solution>
